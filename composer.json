@@ -1,0 +1,84 @@
+{
+    "name": "carmelosantana/coqui-toolkit-x",
+    "description": "X (Twitter) management toolkit for Coqui Bot — post tweets, read timelines, search, manage followers, likes, bookmarks, and mutes via the X API v2.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Carmelo Santana"
+        }
+    ],
+    "keywords": [
+        "coqui",
+        "x",
+        "twitter",
+        "toolkit",
+        "php-agents",
+        "api",
+        "social-media"
+    ],
+    "require": {
+        "php": "^8.4",
+        "symfony/http-client": "^7.0"
+    },
+    "require-dev": {
+        "carmelosantana/php-agents": "^0.7",
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitX\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitX\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "php-agents": {
+            "toolkits": [
+                "CarmeloSantana\\CoquiToolkitX\\XToolkit"
+            ],
+            "credentials": {
+                "X_BEARER_TOKEN": "Bearer token for read operations (search, timelines, user lookup) — get one at https://developer.x.com/en/portal/dashboard",
+                "X_CONSUMER_KEY": {
+                    "description": "API Key (Consumer Key) for write operations (posting, liking, following) — from your X Developer App settings",
+                    "optional": true
+                },
+                "X_CONSUMER_SECRET": {
+                    "description": "API Secret (Consumer Secret) for write operations — from your X Developer App settings",
+                    "optional": true
+                },
+                "X_ACCESS_TOKEN": {
+                    "description": "User Access Token for write operations — from your X Developer App settings",
+                    "optional": true
+                },
+                "X_ACCESS_TOKEN_SECRET": {
+                    "description": "User Access Token Secret for write operations — from your X Developer App settings",
+                    "optional": true
+                }
+            },
+            "gated": {
+                "x_tweet": ["create", "delete", "reply", "retweet", "quote"],
+                "x_follower": ["follow", "unfollow"],
+                "x_like": ["like", "unlike"],
+                "x_bookmark": ["add", "remove"],
+                "x_mute": ["mute", "unmute"]
+            }
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "analyse": "phpstan analyse"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
